@@ -7,3 +7,10 @@ services:
     image: sayasn/devops-course-backend
     ports:
       - "8080:8080"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    restart: unless-stopped
+  redis:
+    image: redis
