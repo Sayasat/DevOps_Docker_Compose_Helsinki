@@ -3,14 +3,28 @@ services:
     image: sayasn/devops-course-frontend
     ports:
       - "5001:5001"
+
   backend:
     image: sayasn/devops-course-backend
     ports:
       - "8080:8080"
     environment:
       - REDIS_HOST=redis
+      - POSTGRES_HOST=postgres
     depends_on:
       - redis
+      - postgres
     restart: unless-stopped
+
   redis:
     image: redis
+
+  postgres:
+    image: postgres:18
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+    restart: unless-stopped
+
+
